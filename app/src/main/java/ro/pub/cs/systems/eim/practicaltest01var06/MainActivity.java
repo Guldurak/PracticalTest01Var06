@@ -3,6 +3,7 @@ package ro.pub.cs.systems.eim.practicaltest01var06;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.Button;
@@ -19,12 +20,6 @@ public class MainActivity extends AppCompatActivity {
     private Button playButton;
     private int rand;
 
-    public static int random() {
-        Random generator = new Random();
-
-        int x = generator.nextInt(4);
-        return x;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,31 +39,31 @@ public class MainActivity extends AppCompatActivity {
         hold_3 = (CheckBox)findViewById(R.id.button3);
 
         playButton = (Button)findViewById(R.id.button_play);
-        //playButton.setOnClickListener(buttonClickListener);
+        playButton.setOnClickListener(buttonClickListener);
     }
 
-    //private ButtonClickListener buttonClickListener = new ButtonClickListener();
-//    private class ButtonClickListener implements View.OnClickListener {
-//
-//        @Override
-//        public void onClick(View view) {
-//            switch (view.getId()) {
-//                case R.id.button_play:
-//                    if(!hold_1.isChecked()) {
-//                        rand = random();
-//                        leftEditText.setText("sanky");
-//                    }
-//                    if(!hold_2.isChecked()) {
-//                        rand = random();
-//                        middleEditText.setText("nu nu sanky");
-//                    }
-//                    if(!hold_3.isChecked()) {
-//                        rand = random();
-//                        rightEditText.setText("nu");
-//                    }
-//                    break;
-//            }
-//        }
-//    }
+    private ButtonClickListener buttonClickListener = new ButtonClickListener();
+    private class ButtonClickListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.button_play:
+                    if(!hold_1.isChecked()) {
+                        rand = new Random().nextInt(4);
+                        leftEditText.setText(String.valueOf(rand));
+                    }
+                    if(!hold_2.isChecked()) {
+                        rand = new Random().nextInt(4);
+                        middleEditText.setText(String.valueOf(rand));
+                    }
+                    if(!hold_3.isChecked()) {
+                        rand = new Random().nextInt(4);
+                        rightEditText.setText(String.valueOf(rand));
+                    }
+                    break;
+            }
+        }
+    }
 
 }
