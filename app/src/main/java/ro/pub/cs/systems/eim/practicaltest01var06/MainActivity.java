@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
     private CheckBox hold_1, hold_2, hold_3;
     private Button playButton;
     private int rand;
+    public int checkboxes = 0;
+    public int score = 0;
 
 
     @Override
@@ -43,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private ButtonClickListener buttonClickListener = new ButtonClickListener();
+
+
     private class ButtonClickListener implements View.OnClickListener {
 
         @Override
@@ -53,17 +57,43 @@ public class MainActivity extends AppCompatActivity {
                         rand = new Random().nextInt(4);
                         leftEditText.setText(String.valueOf(rand));
                     }
+                    else {
+                        checkboxes += 1;
+                    }
                     if(!hold_2.isChecked()) {
                         rand = new Random().nextInt(4);
                         middleEditText.setText(String.valueOf(rand));
+                    }
+                    else {
+                        checkboxes += 1;
                     }
                     if(!hold_3.isChecked()) {
                         rand = new Random().nextInt(4);
                         rightEditText.setText(String.valueOf(rand));
                     }
+                    else {
+                        checkboxes += 1;
+                    }
                     break;
             }
+
+            if(leftEditText.getText().equals(middleEditText.getText()) && leftEditText.getText().equals(rightEditText.getText())) {
+                if(checkboxes == 0) {
+                    score += 100;
+                }
+
+                if(checkboxes == 1) {
+                    score += 50;
+                }
+
+                if(checkboxes == 2) {
+                    score += 10;
+                }
+            }
+            Log.d("Gained", String.valueOf(score));
+            checkboxes = 0;
         }
     }
+
 
 }
